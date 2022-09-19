@@ -11,5 +11,8 @@
   "devDependencies": {
     "vercel": "^28.2.5",
     "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "incremental-dom": "^0.7.0"
   }
 }
