@@ -1,0 +1,37 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+workflows:
+  main:
+    jobs:
+      - node/test:
+          filters:
+            branches:
+              ignore:
+                - main
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+
+jobs:
+  deploy:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Build the app
+          command: npm run build
+      - run:
+          name: Prepare Vercel project.json
+          command: |
+            mkdir .vercel
+            echo $VERCEL_PROJECT_JSON > .vercel/project.json
+      - run:
+          name: Deploy Vercel production
+          command: npx vercel --prod --token $VERCEL_TOKEN
