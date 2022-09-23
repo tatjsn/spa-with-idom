@@ -9,11 +9,22 @@
   </head>
   <body>
     <div id="app" class="container mx-auto">
-      <h1 class="text-3xl font-bold underline">Home</h1>
-      <p><a href="/foo.html">go to foo</a></p>
-      <h2>Local State</h2>
-      <p><input type="text" placeholder="State will be preserved"></p>
-      <h2>Video</h2>
+      <h1 class="text-3xl font-bold mb-3">Single Page App Demo</h1>
+      <h2 class="text-2xl font-bold mb-3">Tabs</h2>
+      <p>
+        <span class="rounded bg-sky-500 p-2 inline-block">Home</span>
+        <a class="rounded bg-sky-200 p-2 inline-block" href="/foo.html">Foo</a>
+        <a class="rounded bg-sky-200 p-2 inline-block" href="/bar.html">Bar</a>
+      </p>
+      <p class="border-solid border-2 border-slate-500 rounded p-6">
+        Home content
+      </p>
+      <h2 class="text-2xl font-bold">Local State</h2>
+      <p>
+        What you typed here should survive tab switching:
+        <input type="text" placeholder="State will be preserved">
+      </p>
+      <h2 class="text-2xl font-bold">Video</h2>
       <p><iframe width="560" height="315" src="https://www.youtube.com/embed/Pp0u6_5oQNU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
     </div>
     <script type="module" src="/main.js"></script>
