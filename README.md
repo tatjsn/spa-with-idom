@@ -16,6 +16,6 @@ Across page transitions:
 
 ## Demo
 
-[Live demo](https://spa-with-idom.vercel.app/)
-[11ty demo](https://11ty-spa.vercel.app/)
+* [Simple demo](https://spa-with-idom.vercel.app/)
+* [11ty demo](https://11ty-spa.vercel.app/)
 
