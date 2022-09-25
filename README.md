@@ -2,7 +2,7 @@
 
 ## Description
 
-A proof of concept that single-page app (SPA) "good" behaviours can be achieved as an add-on upgrade to existing multi page apps (MPA) using [isomorphic-dom](https://github.com/google/incremental-dom).
+A proof of concept that single-page app (SPA) "good" behaviours can be achieved as an add-on upgrade to existing multi page apps (MPA) using [incremental-dom](https://github.com/google/incremental-dom).
 
 
 ## Definition of "good" SPA behaviours
