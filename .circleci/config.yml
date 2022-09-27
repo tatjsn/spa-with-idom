@@ -18,9 +18,12 @@ workflows:
                 - main
       - npm:
           filters:
+            branches:
+              ignore:
+                - /.*/
             tags:
               only:
-                - /v[0-9]+(\.[0-9]+)*/
+                - /^v[0-9]+(\.[0-9]+)*/
 
 jobs:
   vercel:
@@ -53,5 +56,5 @@ jobs:
           name: Npm publish
           command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-            npm version
+            npm version --no-git-tag-version $(git describe --tags)
             npm publish
