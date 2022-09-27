@@ -3,10 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "files": [
+    "/dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:npm": "vite build --config npm.config.js"
   },
   "devDependencies": {
     "vercel": "^28.2.5",

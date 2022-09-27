@@ -11,21 +11,26 @@ workflows:
             branches:
               ignore:
                 - main
-      - deploy:
+      - vercel:
           filters:
             branches:
               only:
                 - main
+      - npm:
+          filters:
+            tags:
+              only:
+                - /v[0-9]+(\.[0-9]+)*/
 
 jobs:
-  deploy:
+  vercel:
     executor:
       name: node/default
     steps:
       - checkout
       - node/install-packages
       - run:
-          name: Build the app
+          name: Build static site
           command: npm run build
       - run:
           name: Prepare Vercel project.json
@@ -35,3 +40,18 @@ jobs:
       - run:
           name: Deploy Vercel production
           command: npx vercel --prod --token $VERCEL_TOKEN
+  npm:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - node/install-packages
+      - run:
+          name: Build npm package
+          command: npm run build:npm
+      - run:
+          name: Npm publish
+          command: |
+            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            npm version
+            npm publish

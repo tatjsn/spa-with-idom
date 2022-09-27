@@ -1,12 +1,13 @@
 import { resolve } from 'path';
 
 export default {
+  root: './app',
   build: {
     rollupOptions: {
       input: {
-        index: resolve(__dirname, './index.html'),
-        foo: resolve(__dirname, './foo.html'),
-        bar: resolve(__dirname, './bar.html'),
+        index: './app/index.html',
+        foo: './app/foo.html',
+        bar: './app/bar.html',
       },
     },
   },
