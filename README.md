@@ -16,6 +16,19 @@ Across page transitions:
 
 ## Demo
 
-* [Simple demo](https://spa-with-idom.vercel.app/)
 * [11ty demo](https://11ty-spa.vercel.app/)
+* [Simple demo](https://spa-with-idom.vercel.app/)
 
+## How to use
+
+Add following script:
+```html
+<script type="module" src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"></script>
+```
+
+Add following attributes to app container and loading indicator:
+
+- `spa-app`
+- `spa-loader`
+
+See `app/index.html` for example.
