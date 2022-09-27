@@ -32,3 +32,5 @@ Add following attributes to app container and loading indicator:
 - `spa-loader`
 
 See `app/index.html` for example.
+
+See https://github.com/tatjsn/11ty-spa-idom for more practical usage.
