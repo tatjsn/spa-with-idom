@@ -1,5 +1,8 @@
 import { elementOpen, elementClose, text, patch } from 'incremental-dom';
 
+const app = '*[spa-app]';
+const loading = '*[spa-loading]';
+
 function getPropsArray(node) {
   const result = [];
   for (const attr of node.attributes) {
@@ -25,56 +28,54 @@ function traverse(node, top = false) {
   }
 }
 
-export default function setup(root, loading) {
-  function applyHtmlText(text) {
-    const tmpl = document.createElement('template');
-    tmpl.innerHTML = text;
+function applyHtmlText(text) {
+  const tmpl = document.createElement('template');
+  tmpl.innerHTML = text;
 
-    const newApp = tmpl.content.querySelector(root);
+  const newApp = tmpl.content.querySelector(app);
 
-    patch(document.querySelector(root), () => {
-      traverse(newApp, true);
-    });
+  patch(document.querySelector(app), () => {
+    traverse(newApp, true);
+  });
+}
+
+document.body.addEventListener('click', async (e) => {
+  const origin = e.target.closest('a');
+
+  if (!origin) {
+    return;
+  }
+  const newHref = origin.href;
+
+  if (new URL(newHref).origin !== location.origin) {
+    return;
   }
 
-  document.body.addEventListener('click', async (e) => {
-    const origin = e.target.closest('a');
+  e.preventDefault();
 
-    if (!origin) {
-      return;
-    }
-    const newHref = origin.href;
+  document.querySelector(loading).style.display = 'block';
+  try {
+    const result = await fetch(newHref);
+    const htmlText = await result.text();
 
-    if (new URL(newHref).origin !== location.origin) {
-      return;
-    }
+    applyHtmlText(htmlText);
 
-    e.preventDefault();
+    history.pushState({ htmlText }, null, newHref);
+  } catch (error) {
+    // TODO Error handling
+    console.log(error);
+  }
 
-    document.querySelector(loading).style.display = 'block';
-    try {
-      const result = await fetch(newHref);
-      const htmlText = await result.text();
+  document.querySelector(loading).style.display = 'none';
+});
 
-      applyHtmlText(htmlText);
+window.addEventListener('popstate', (event) => {
+  if (!event.state || !event.state.htmlText) {
+    return;
+  }
 
-      history.pushState({ htmlText }, null, newHref);
-    } catch (error) {
-      // TODO Error handling
-      console.log(error);
-    }
+  applyHtmlText(event.state.htmlText);
+});
 
-    document.querySelector(loading).style.display = 'none';
-  });
-
-  window.addEventListener('popstate', (event) => {
-    if (!event.state || !event.state.htmlText) {
-      return;
-    }
-
-    applyHtmlText(event.state.htmlText);
-  });
-
-  // For history back
-  history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
-}
+// For history back
+history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);

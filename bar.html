@@ -7,7 +7,7 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app" style="margin: auto; max-width: 800px; display: flex">
+    <div spa-app style="margin: auto; max-width: 800px; display: flex">
       <div style="margin-right: 5em">
         <ul>
           <li><a href="/">Home</a></li>
@@ -23,11 +23,7 @@
         </p>
       </div>
     </div>
-    <div id="loading" style="position: fixed; top: 0; display:none"><span style="color: white; background-color: black">Loading...</span></div>
-    <script type="module">
-     import setup from '/main.js';
-
-     setup('#app', '#loading');
-    </script>
+    <div spa-loading style="position: fixed; top: 0; display:none"><span style="color: white; background-color: black">Loading...</span></div>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
