@@ -3,30 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
   <body>
-    <div id="app" class="container mx-auto">
-      <h1 class="text-3xl font-bold mb-3">Single Page App Demo</h1>
-      <p>This demo contains 3 static pages that can navigates via tabs UI implemented using anchors that works witout JS.</p>
-      <p>With spa-with-idom library, these pages will be enhanced with single page navigation and the benefits of preserved local states and continuous media playback.</p>
-      <h2 class="text-2xl font-bold mb-3">Tabs</h2>
-      <p>
-        <a class="rounded-t-lg bg-gray-200 p-2 inline-block" href="/">Home</a>
-        <span class="rounded-t-lg text-white bg-black p-2 inline-block">Foo</span>
-        <a class="rounded-t-lg bg-gray-200 p-2 inline-block" href="/bar.html">Bar</a>
-      </p>
-      <p class="border-solid border-2 border-black rounded p-6">
-        Foo content
-      </p>
-      <h2 class="text-2xl font-bold mb-3">Form Input</h2>
-      <p>
-        <input type="text" placeholder="Type something here">
-      </p>
-      <h2 class="text-2xl font-bold mb-3">Media Playback</h2>
-      <p><iframe width="560" height="315" src="https://www.youtube.com/embed/Pp0u6_5oQNU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+    <div id="app" style="margin: auto; max-width: 800px">
+      <div style="margin-right: 5em">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><span style="font-weight: bold">Foo</span></li>
+          <li><a href="/bar.html">Bar</a></li>
+        </ul>
+        <input type="text" placeholder="Input" />
+      </div>
+      <div>
+        <h1>Foo</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
