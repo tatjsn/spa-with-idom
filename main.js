@@ -25,7 +25,7 @@ function traverse(node, top = false) {
   }
 }
 
-export default function setup(root) {
+export default function setup(root, loading) {
   function applyHtmlText(text) {
     const tmpl = document.createElement('template');
     tmpl.innerHTML = text;
@@ -51,13 +51,20 @@ export default function setup(root) {
 
     e.preventDefault();
 
-    const result = await fetch(newHref);
-    const htmlText = await result.text();
+    document.querySelector(loading).style.display = 'block';
+    try {
+      const result = await fetch(newHref);
+      const htmlText = await result.text();
 
-    applyHtmlText(htmlText);
+      applyHtmlText(htmlText);
 
+      history.pushState({ htmlText }, null, newHref);
+    } catch (error) {
+      // TODO Error handling
+      console.log(error);
+    }
 
-    history.pushState({ htmlText }, null, newHref);
+    document.querySelector(loading).style.display = 'none';
   });
 
   window.addEventListener('popstate', (event) => {
