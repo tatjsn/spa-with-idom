@@ -25,47 +25,49 @@ function traverse(node, top = false) {
   }
 }
 
-function applyHtmlText(text) {
-  const tmpl = document.createElement('template');
-  tmpl.innerHTML = text;
+export default function setup(root) {
+  function applyHtmlText(text) {
+    const tmpl = document.createElement('template');
+    tmpl.innerHTML = text;
 
-  const newApp = tmpl.content.querySelector('#app');
+    const newApp = tmpl.content.querySelector(root);
 
-  patch(document.querySelector('#app'), () => {
-    traverse(newApp, true);
+    patch(document.querySelector(root), () => {
+      traverse(newApp, true);
+    });
+  }
+
+  document.body.addEventListener('click', async (e) => {
+    const origin = e.target.closest('a');
+
+    if (!origin) {
+      return;
+    }
+    const newHref = origin.href;
+
+    if (new URL(newHref).origin !== location.origin) {
+      return;
+    }
+
+    e.preventDefault();
+
+    const result = await fetch(newHref);
+    const htmlText = await result.text();
+
+    applyHtmlText(htmlText);
+
+
+    history.pushState({ htmlText }, null, newHref);
   });
+
+  window.addEventListener('popstate', (event) => {
+    if (!event.state || !event.state.htmlText) {
+      return;
+    }
+
+    applyHtmlText(event.state.htmlText);
+  });
+
+  // For history back
+  history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
 }
-
-document.body.addEventListener('click', async (e) => {
-  const origin = e.target.closest('a');
-
-  if (!origin) {
-    return;
-  }
-  const newHref = origin.href;
-
-  if (new URL(newHref).origin !== location.origin) {
-    return;
-  }
-
-  e.preventDefault();
-
-  const result = await fetch(newHref);
-  const htmlText = await result.text();
-
-  applyHtmlText(htmlText);
-
-
-  history.pushState({ htmlText }, null, newHref);
-});
-
-window.addEventListener('popstate', (event) => {
-  if (!event.state || !event.state.htmlText) {
-    return;
-  }
-
-  applyHtmlText(event.state.htmlText);
-});
-
-// For history back
-history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
