@@ -42,9 +42,10 @@ function applyHtmlText(text) {
 document.body.addEventListener('click', async (e) => {
   const origin = e.target.closest('a');
 
-  if (!origin) {
+  if (!origin || e.shiftKey || e.ctrlKey || e.metaKey) {
     return;
   }
+
   const newHref = origin.href;
 
   if (new URL(newHref).origin !== location.origin) {
