@@ -2,35 +2,54 @@
 
 ## Description
 
-A proof of concept that single-page app (SPA) "good" behaviours can be achieved as an add-on upgrade to existing multi page apps (MPA) using [incremental-dom](https://github.com/google/incremental-dom).
+Automatic enhancement to bring single-page app (SPA) features to SSG or SSR HTML pages.
+
+Powered by [incremental-dom](https://github.com/google/incremental-dom).
+
+Not ready for production.
 
 
-## Definition of "good" SPA behaviours
+## Benefits
 
-Across page transitions:
+You'll get these SPA goodness for free, without writing any additional JS.
 
-* Local states are preserved.
-* Videos are preserved.
+* Preserved local states and continuous video playback across page transitions.
+* Unlimited and simultaneous dynamic islands (as islands architecture).
 * More.
+
+
+## Trade-offs
+
+The library prioritise simplicity and freedom of software stack with a cost of performance, because all interactions will be full-page requests.
+
+This might be a minor issue for SSG, but if you're doing SSR you might need to heavily optimise to make it feel responsive.
 
 
 ## Demo
 
-* [11ty demo](https://11ty-spa.vercel.app/)
-* [Simple demo](https://spa-with-idom.vercel.app/)
+* [11ty demo](https://11ty-spa.vercel.app/) [source code](https://github.com/tatjsn/11ty-spa-idom)
+* [Prerelease](https://spa-with-idom.vercel.app/)
+
 
 ## How to use
 
-Add following script:
+Add `spa-app` to your app container, and `spa-loader` to the loading indicator UI.
+
 ```html
-<script type="module" src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"></script>
+<body>
+  <div spa-app>
+    ...
+  </div>
+  <div spa-loader style="display:none">Now loading</div>
+</div>
 ```
 
-Add following attributes to app container and loading indicator:
+Add the following script tag to your exising app:
 
-- `spa-app`
-- `spa-loader`
+```html
+<head>
+  <script type="module" src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"></script>
+</head>
+```
 
-See `app/index.html` for example.
-
-See https://github.com/tatjsn/11ty-spa-idom for more practical usage.
+See [./app/index.html] for example.
