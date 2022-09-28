@@ -33,7 +33,7 @@ This might be a minor issue for SSG, but if you're doing SSR you might need to h
 
 ## How to use
 
-Add `spa-app` to your app container, and `spa-loader` to the loading indicator UI.
+Add `spa-app` to your app container, and `spa-loader` to the loading indicator UI. See [app/index.html](app/index.html) for example.
 
 ```html
 <body>
@@ -51,5 +51,3 @@ Add the following script tag to your exising app:
   <script type="module" src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"></script>
 </head>
 ```
-
-See [./app/index.html] for example.
