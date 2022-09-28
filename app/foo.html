@@ -7,14 +7,19 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div spa-app style="margin: auto; max-width: 800px">
+    <div spa-app style="margin: auto; max-width: 800px; display: flex">
       <div style="margin-right: 5em">
         <ul>
           <li><a href="/">Home</a></li>
           <li><span style="font-weight: bold">Foo</span></li>
           <li><a href="/bar.html">Bar</a></li>
         </ul>
-        <input type="text" placeholder="Input" />
+        <p>
+          <input type="text" placeholder="Input" />
+        </p>
+        <p>
+          <video style="width: 200px" src="/video.webm" autoplay loop>
+        </p>
       </div>
       <div>
         <h1>Foo</h1>
@@ -24,6 +29,6 @@
       </div>
     </div>
     <div spa-loading style="position: fixed; top: 0; display:none"><span style="color: white; background-color: black">Loading...</span></div>
-    <script type="module" src="../main.js"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>

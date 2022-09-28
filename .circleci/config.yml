@@ -42,7 +42,9 @@ jobs:
             echo $VERCEL_PROJECT_JSON > .vercel/project.json
       - run:
           name: Deploy Vercel production
-          command: npx vercel --prod --token $VERCEL_TOKEN
+          command: |
+            mv app/dist .
+            npx vercel --prod --token $VERCEL_TOKEN
   npm:
     executor:
       name: node/default
