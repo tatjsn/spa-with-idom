@@ -39,36 +39,58 @@ function applyHtmlText(text) {
   });
 }
 
-document.body.addEventListener('click', async (e) => {
-  const origin = e.target.closest('a');
-
-  if (!origin || e.shiftKey || e.ctrlKey || e.metaKey) {
-    return;
-  }
-
-  const newHref = origin.href;
-
-  if (new URL(newHref).origin !== location.origin) {
-    return;
-  }
-
-  e.preventDefault();
-
+async function fetchAndPatch(url, options) {
   document.querySelector(loading).style.display = 'block';
   try {
-    const result = await fetch(newHref);
+    const result = await fetch(url, options);
     const htmlText = await result.text();
 
     applyHtmlText(htmlText);
 
-    history.pushState({ htmlText }, null, newHref);
+    history.pushState({ htmlText }, null, url);
   } catch (error) {
     // TODO Error handling
     console.log(error);
   }
 
   document.querySelector(loading).style.display = 'none';
+}
+
+document.body.addEventListener('click', (e) => {
+  const origin = e.target.closest('a');
+
+  if (!origin || e.shiftKey || e.ctrlKey || e.metaKey) {
+    return;
+  }
+
+  if (new URL(origin.href).origin !== location.origin) {
+    return;
+  }
+
+  e.preventDefault();
+
+  fetchAndPatch(origin.href);
 });
+
+document.body.addEventListener('submit', (e) => {
+  if (new URL(e.target.action).origin !== location.origin) {
+    return;
+  }
+
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+
+  fetchAndPatch(e.target.action, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams([...formData]),
+  });
+});
+
+
 
 window.addEventListener('popstate', (event) => {
   if (!event.state || !event.state.htmlText) {

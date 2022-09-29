@@ -12,6 +12,7 @@
     "build:npm": "vite build --config npm.config.js"
   },
   "devDependencies": {
+    "express": "^4.18.1",
     "vercel": "^28.2.5",
     "vite": "^3.1.0"
   },
