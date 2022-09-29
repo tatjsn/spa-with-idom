@@ -17,6 +17,7 @@ function render({name}) {
     <div spa-app>
       ${name ? name: ''}
       <form method="post">
+        <!-- Comment -->
         <input type="text" name="name" placeholder="Name" />
         <button type="submit">Submit</button>
         <video style="width: 200px" src="/video.webm" autoplay loop>

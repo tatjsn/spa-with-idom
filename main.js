@@ -1,4 +1,4 @@
-import { elementOpen, elementClose, text, patch } from 'incremental-dom';
+import { elementOpen, elementClose, text, skipNode, patch } from 'incremental-dom';
 
 const app = '*[spa-app]';
 const loading = '*[spa-loading]';
@@ -15,6 +15,10 @@ function getPropsArray(node) {
 function traverse(node, top = false) {
   if (node.nodeType === Node.TEXT_NODE) {
     text(node.data);
+    return;
+  }
+  if (node.nodeType !== Node.ELEMENT_NODE) {
+    skipNode();
     return;
   }
   if (!top) {
