@@ -1,7 +1,7 @@
 import { elementOpen, elementClose, text, skipNode, currentElement, currentPointer, patch } from 'incremental-dom';
 
-const app = '*[spa-app]';
-const loading = '*[spa-loading]';
+const app = '[spa-app]';
+const loading = '[spa-loading]';
 
 // https://github.com/google/incremental-dom/issues/314
 function comment(text) {
@@ -12,7 +12,6 @@ function comment(text) {
     comment = currP;
   } else {
     comment = document.createComment('');
-    console.log(currP);
     currE.insertBefore(comment, currP);
   }
   comment.data = text;
@@ -120,11 +119,5 @@ window.addEventListener('popstate', (event) => {
   applyHtmlText(event.state.htmlText);
 });
 
-
-// Hydrate
-/* patch(document.querySelector(app), () => {
- *   traverse(document.querySelector(app), true);
- * });
- *  */
 // For history back
 history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
