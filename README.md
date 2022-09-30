@@ -24,8 +24,8 @@ This might be a minor issue for SSG, but if you're doing SSR you might need to h
 
 ## Demo
 
-- [Eleventy demo](https://11ty-spa.vercel.app/) ([source code](https://github.com/tatjsn/11ty-spa-idom))
-- [Form submit demo](https://lemon-vaulted-pelican.glitch.me/)
+- [Eleventy demo](https://11ty-spa.vercel.app/) ([source](https://github.com/tatjsn/11ty-spa-idom))
+- [Form submit demo](https://lemon-vaulted-pelican.glitch.me/) ([source](https://glitch.com/~lemon-vaulted-pelican))
 - [Prerelease](https://spa-with-idom.vercel.app/)
 
 ## How to use
