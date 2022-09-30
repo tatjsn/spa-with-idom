@@ -1,4 +1,12 @@
-import { elementOpen, elementClose, text, skipNode, currentElement, currentPointer, patch } from 'incremental-dom';
+import {
+  elementOpen,
+  elementClose,
+  text,
+  skipNode,
+  currentElement,
+  currentPointer,
+  patch,
+} from 'incremental-dom';
 
 const app = '[spa-app]';
 const loading = '[spa-loading]';
@@ -109,8 +117,6 @@ document.body.addEventListener('submit', (e) => {
   });
 });
 
-
-
 window.addEventListener('popstate', (event) => {
   if (!event.state || !event.state.htmlText) {
     return;
@@ -120,4 +126,8 @@ window.addEventListener('popstate', (event) => {
 });
 
 // For history back
-history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
+history.replaceState(
+  { htmlText: document.documentElement.outerHTML },
+  null,
+  location
+);

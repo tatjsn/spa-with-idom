@@ -8,15 +8,13 @@ Powered by [incremental-dom](https://github.com/google/incremental-dom).
 
 Not ready for production.
 
-
 ## Benefits
 
 You'll get these SPA goodness for free, without writing any additional JS.
 
-* Preserved local states and continuous video playback across page transitions.
-* Unlimited and simultaneous dynamic islands (as islands architecture).
-* More.
-
+- Preserved local states and continuous video playback across page transitions.
+- Unlimited and simultaneous dynamic islands (as islands architecture).
+- More.
 
 ## Trade-offs
 
@@ -24,12 +22,10 @@ The library prioritise simplicity and freedom of software stack with a cost of p
 
 This might be a minor issue for SSG, but if you're doing SSR you might need to heavily optimise to make it feel responsive.
 
-
 ## Demo
 
-* [11ty demo](https://11ty-spa.vercel.app/) [source code](https://github.com/tatjsn/11ty-spa-idom)
-* [Prerelease](https://spa-with-idom.vercel.app/)
-
+- [11ty demo](https://11ty-spa.vercel.app/) [source code](https://github.com/tatjsn/11ty-spa-idom)
+- [Prerelease](https://spa-with-idom.vercel.app/)
 
 ## How to use
 
@@ -48,6 +44,9 @@ Add the following script tag to your exising app:
 
 ```html
 <head>
-  <script type="module" src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"></script>
+  <script
+    type="module"
+    src="https://unpkg.com/spa-idom@0.0.1/dist/main.js"
+  ></script>
 </head>
 ```

@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('dist'));
 app.use(express.static('app/public'));
 
-function render({name}) {
+function render({ name }) {
   return `
 <html>
   <head>
@@ -15,7 +15,7 @@ function render({name}) {
   </head>
   <body>
     <div spa-app>
-      ${name ? name: ''}
+      ${name ? name : ''}
       <form method="post">
         <!-- Comment -->
         <input type="text" name="name" placeholder="Name" />
