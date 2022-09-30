@@ -1,7 +1,23 @@
-import { elementOpen, elementClose, text, skipNode, patch } from 'incremental-dom';
+import { elementOpen, elementClose, text, skipNode, currentElement, currentPointer, patch } from 'incremental-dom';
 
 const app = '*[spa-app]';
 const loading = '*[spa-loading]';
+
+// https://github.com/google/incremental-dom/issues/314
+function comment(text) {
+  const currE = currentElement();
+  const currP = currentPointer();
+  let comment;
+  if (currP && currP.nodeName === '#comment') {
+    comment = currP;
+  } else {
+    comment = document.createComment('');
+    console.log(currP);
+    currE.insertBefore(comment, currP);
+  }
+  comment.data = text;
+  skipNode();
+}
 
 function getPropsArray(node) {
   const result = [];
@@ -17,8 +33,8 @@ function traverse(node, top = false) {
     text(node.data);
     return;
   }
-  if (node.nodeType !== Node.ELEMENT_NODE) {
-    skipNode();
+  if (node.nodeType === Node.COMMENT_NODE) {
+    comment(node.data);
     return;
   }
   if (!top) {
@@ -104,5 +120,11 @@ window.addEventListener('popstate', (event) => {
   applyHtmlText(event.state.htmlText);
 });
 
+
+// Hydrate
+/* patch(document.querySelector(app), () => {
+ *   traverse(document.querySelector(app), true);
+ * });
+ *  */
 // For history back
 history.replaceState({ htmlText: document.documentElement.outerHTML }, null, location);
