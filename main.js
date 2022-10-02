@@ -1,6 +1,8 @@
 import {
-  elementOpen,
+  elementOpenStart,
+  elementOpenEnd,
   elementClose,
+  attr,
   text,
   skipNode,
   currentElement,
@@ -26,15 +28,6 @@ function comment(text) {
   skipNode();
 }
 
-function getPropsArray(node) {
-  const result = [];
-  for (const attr of node.attributes) {
-    result.push(attr.name);
-    result.push(attr.value);
-  }
-  return result;
-}
-
 function traverse(node, top = false) {
   if (node.nodeType === Node.TEXT_NODE) {
     text(node.data);
@@ -46,13 +39,19 @@ function traverse(node, top = false) {
     return;
   }
 
-  elementOpen(node.tagName.toLowerCase(), null, null, ...getPropsArray(node));
+  const tagName = node.tagName.toLowerCase();
+
+  elementOpenStart(tagName);
+  for (const na of node.attributes) {
+    attr(na.name, na.value);
+  }
+  elementOpenEnd(tagName);
 
   for (const child of node.childNodes) {
     traverse(child);
   }
 
-  elementClose(node.tagName.toLowerCase());
+  elementClose(tagName);
 }
 
 function applyHtmlText(text) {
