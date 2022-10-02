@@ -28,7 +28,7 @@ function comment(text) {
   skipNode();
 }
 
-function traverse(node, top = false) {
+function traverse(node) {
   if (node.nodeType === Node.TEXT_NODE) {
     text(node.data);
     return;
@@ -58,11 +58,9 @@ function applyHtmlText(text) {
   const tmpl = document.createElement('template');
   tmpl.innerHTML = text;
 
-  const newApp = tmpl.content.querySelector(app);
+  const node = tmpl.content.querySelector(app);
 
-  patchOuter(document.querySelector(app), () => {
-    traverse(newApp, true);
-  });
+  patchOuter(document.querySelector(app), traverse, node);
 }
 
 async function fetchAndPatch(url, options) {
