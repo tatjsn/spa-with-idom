@@ -5,7 +5,7 @@ import {
   skipNode,
   currentElement,
   currentPointer,
-  patch,
+  patchOuter,
 } from 'incremental-dom';
 
 const app = '[spa-app]';
@@ -40,19 +40,19 @@ function traverse(node, top = false) {
     text(node.data);
     return;
   }
+
   if (node.nodeType === Node.COMMENT_NODE) {
     comment(node.data);
     return;
   }
-  if (!top) {
-    elementOpen(node.tagName.toLowerCase(), null, null, ...getPropsArray(node));
-  }
+
+  elementOpen(node.tagName.toLowerCase(), null, null, ...getPropsArray(node));
+
   for (const child of node.childNodes) {
     traverse(child);
   }
-  if (!top) {
-    elementClose(node.tagName.toLowerCase());
-  }
+
+  elementClose(node.tagName.toLowerCase());
 }
 
 function applyHtmlText(text) {
@@ -61,7 +61,7 @@ function applyHtmlText(text) {
 
   const newApp = tmpl.content.querySelector(app);
 
-  patch(document.querySelector(app), () => {
+  patchOuter(document.querySelector(app), () => {
     traverse(newApp, true);
   });
 }
