@@ -20,7 +20,7 @@ function render({ name }) {
         <!-- Comment -->
         <input type="text" name="name" placeholder="Name" />
         <button type="submit">Submit</button>
-        <video style="width: 200px" src="/video.webm" autoplay loop>
+        <div style="width:100%;height:0;padding-bottom:93%;position:relative;"><iframe src="https://giphy.com/embed/ND6xkVPaj8tHO" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/cat-money-cash-ND6xkVPaj8tHO">via GIPHY</a></p>
       </form>
     </div>
     <div spa-loading style="display:none">Loading...</div>
